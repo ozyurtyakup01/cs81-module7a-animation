@@ -9,25 +9,35 @@
 
   <div id="loader" style="font-size: 2rem; margin-bottom: 20px;">Loading...</div>
   <div id="status">Please wait</div>
+  <div id="time">Second passed :</div>
 
   <script>
     function runLoadingAnimation() {
+      // modifying this will change div loader
       const loader = document.getElementById("loader");
+      // modifying this will change status
       const status = document.getElementById("status");
 
       const frames = ["⏳", "⌛", ".", "..", "..."];
+      // index at 0 for loop
       let index = 0;
       let cycleCount = 0;
       const maxCycles = 10;
-
+      // half a sec wait to make frames visible 
       const interval = setInterval(() => {
+        // set loader's text, index % frames.length gives for last index 0 so loop back
         loader.textContent = frames[index % frames.length];
+        // increment index
         index++;
+        //if reach end of array
         if (index % frames.length === 0) {
+          // increment cycle count
           cycleCount++;
         }
+        // if cycle reached max 
         if (cycleCount >= maxCycles) {
           clearInterval(interval);
+          // modify text
           loader.textContent = "✅";
           status.textContent = "Done!";
         }
