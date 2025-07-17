@@ -9,10 +9,17 @@
 
   <div id="loader" style="font-size: 2rem; margin-bottom: 20px;">Loading...</div>
   <div id="status">Please wait</div>
-  <div id="time">Second passed :</div>
+  <div id="time"></div>
 
   <script>
+    // I would update the background at each cycle like I did in assignment 8a
     function runLoadingAnimation() {
+      // feature
+      const timer = document.getElementById("time");
+      let sec = 1;
+      time = setInterval(() => {sec++; 
+        timer.textContent ="Waited for " + sec + " seconds";},1000)
+
       // modifying this will change div loader
       const loader = document.getElementById("loader");
       // modifying this will change status
@@ -22,7 +29,7 @@
       // index at 0 for loop
       let index = 0;
       let cycleCount = 0;
-      const maxCycles = 10;
+      const maxCycles = 2;
       // half a sec wait to make frames visible 
       const interval = setInterval(() => {
         // set loader's text, index % frames.length gives for last index 0 so loop back
@@ -36,14 +43,17 @@
         }
         // if cycle reached max 
         if (cycleCount >= maxCycles) {
+          //clear interval to stop clock
           clearInterval(interval);
+          clearInterval(time);
+          
           // modify text
           loader.textContent = "✅";
           status.textContent = "Done!";
         }
       }, 500);
     }
-
+    
     runLoadingAnimation();
   </script>
 
